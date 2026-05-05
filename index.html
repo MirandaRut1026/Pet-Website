@@ -1,393 +1,791 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rutledge Pet Sitting — Where Every Pet is Family 🐾</title>
-  <meta name="description" content="Professional, loving pet sitting and dog walking services. Your furry family members deserve the very best care." />
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutledge Pet Sitting</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #F9D8E8;
+    --pink-mid: #F0A8CC;
+    --pink-dark: #C46D96;
+    --mint: #D4F0E4;
+    --mint-mid: #8FD4B0;
+    --mint-dark: #3A8F68;
+    --peach: #FDEBD0;
+    --peach-mid: #F5C08A;
+    --peach-dark: #C07830;
+    --lavender: #E8DEFF;
+    --lavender-mid: #C4A8F4;
+    --lavender-dark: #6B45B8;
+    --sky: #D6EEFF;
+    --sky-mid: #90C8F4;
+    --sky-dark: #2A7EC4;
+    --cream: #FDF8F0;
+    --brown: #5C3D2E;
+    --text: #3A2A1E;
+    --text-muted: #7A6055;
+    --white: #FFFFFF;
+    --shadow: 0 4px 24px rgba(92,61,46,0.08);
+    --shadow-lg: 0 8px 40px rgba(92,61,46,0.13);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(253,248,240,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    padding: 0 2rem;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1.5px solid var(--pink);
+  }
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--brown);
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .paw-icon { font-size: 1.4rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.95rem; font-weight: 500;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--pink-dark); }
+  .nav-cta {
+    background: var(--pink-dark);
+    color: white !important;
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+  .nav-cta:hover { background: var(--lavender-dark) !important; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 100px 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--pink) 0%, var(--cream) 45%, var(--mint) 100%);
+  }
+  .hero-blobs {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .blob {
+    position: absolute; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    opacity: 0.35; animation: morph 8s ease-in-out infinite;
+  }
+  .blob-1 { width: 340px; height: 340px; background: var(--lavender-mid); top: -60px; right: -60px; animation-delay: 0s; }
+  .blob-2 { width: 260px; height: 260px; background: var(--peach-mid); bottom: 40px; left: -40px; animation-delay: -3s; }
+  .blob-3 { width: 180px; height: 180px; background: var(--sky-mid); top: 40%; right: 12%; animation-delay: -5s; }
+  @keyframes morph {
+    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  }
+  .floating-paws {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .fp {
+    position: absolute; font-size: 1.5rem; opacity: 0.12;
+    animation: floatPaw 6s ease-in-out infinite;
+  }
+  .fp:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+  .fp:nth-child(2) { top: 70%; left: 75%; animation-delay: -2s; }
+  .fp:nth-child(3) { top: 30%; left: 85%; animation-delay: -4s; }
+  .fp:nth-child(4) { top: 80%; left: 20%; animation-delay: -1s; }
+  .fp:nth-child(5) { top: 50%; left: 50%; animation-delay: -3s; }
+  @keyframes floatPaw {
+    0%, 100% { transform: translateY(0) rotate(-10deg); }
+    50% { transform: translateY(-16px) rotate(10deg); }
+  }
+
+  .hero-content {
+    text-align: center; position: relative; z-index: 2;
+    max-width: 680px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--white); border: 1.5px solid var(--pink-mid);
+    color: var(--pink-dark); font-size: 0.82rem; font-weight: 600;
+    padding: 6px 16px; border-radius: 50px;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--brown);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--pink-dark);
+  }
+  .hero p {
+    font-size: 1.15rem; line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 480px; margin: 0 auto 2.2rem;
+  }
+  .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--pink-dark); color: white;
+    padding: 14px 32px; border-radius: 50px;
+    font-size: 1rem; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 18px rgba(196,109,150,0.35);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--lavender-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(107,69,184,0.3); }
+  .btn-secondary {
+    background: white; color: var(--brown);
+    padding: 14px 32px; border-radius: 50px;
+    font-size: 1rem; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    text-decoration: none; border: 2px solid var(--pink-mid); cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { background: var(--pink); border-color: var(--pink-dark); }
+
+  .hero-stats {
+    display: flex; gap: 2rem; justify-content: center;
+    margin-top: 3rem; flex-wrap: wrap;
+  }
+  .stat {
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(255,255,255,0.9);
+    border-radius: 16px; padding: 14px 24px;
+  }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: var(--brown); }
+  .stat-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--pink-dark); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700; color: var(--brown); margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .section-sub {
+    font-size: 1.05rem; color: var(--text-muted);
+    line-height: 1.7; max-width: 520px;
+  }
+
+  /* ── SERVICES ── */
+  .services-section { background: var(--white); }
+  .services-header { margin-bottom: 3rem; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    border-radius: 24px; padding: 2rem;
+    border: 2px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .service-card.pink { background: var(--pink); border-color: var(--pink-mid); }
+  .service-card.mint { background: var(--mint); border-color: var(--mint-mid); }
+  .service-card.lavender { background: var(--lavender); border-color: var(--lavender-mid); }
+  .service-card.peach { background: var(--peach); border-color: var(--peach-mid); }
+  .service-card.sky { background: var(--sky); border-color: var(--sky-mid); }
+  .service-emoji { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+  .service-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; color: var(--brown); margin-bottom: 0.5rem; }
+  .service-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+  .service-price {
+    margin-top: 1rem; font-weight: 700; font-size: 1.1rem;
+    color: var(--pink-dark);
+  }
+  .service-price.mint-price { color: var(--mint-dark); }
+  .service-price.lavender-price { color: var(--lavender-dark); }
+  .service-price.peach-price { color: var(--peach-dark); }
+  .service-price.sky-price { color: var(--sky-dark); }
+  .price-note { font-size: 0.78rem; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── PET GALLERY ── */
+  .gallery-section { background: var(--cream); }
+  .gallery-header { margin-bottom: 3rem; }
+  .gallery-tabs {
+    display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 8px 20px; border-radius: 50px; border: 2px solid;
+    font-size: 0.88rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn.active, .tab-btn:hover { color: white; }
+  .tab-btn[data-tab="all"] { border-color: var(--pink-dark); color: var(--pink-dark); }
+  .tab-btn[data-tab="all"].active { background: var(--pink-dark); }
+  .tab-btn[data-tab="dogs"] { border-color: var(--peach-dark); color: var(--peach-dark); }
+  .tab-btn[data-tab="dogs"].active { background: var(--peach-dark); }
+  .tab-btn[data-tab="cats"] { border-color: var(--lavender-dark); color: var(--lavender-dark); }
+  .tab-btn[data-tab="cats"].active { background: var(--lavender-dark); }
+  .tab-btn[data-tab="other"] { border-color: var(--mint-dark); color: var(--mint-dark); }
+  .tab-btn[data-tab="other"].active { background: var(--mint-dark); }
+  .pets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .pet-card {
+    background: white; border-radius: 20px;
+    overflow: hidden; box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .pet-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+  .pet-photo {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative; overflow: hidden;
+  }
+  .pet-photo .pet-bg { position: absolute; inset: 0; opacity: 0.25; }
+  .pet-photo .pet-emoji { position: relative; z-index: 1; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+  .pet-info { padding: 1rem 1.25rem 1.25rem; }
+  .pet-name { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; color: var(--brown); }
+  .pet-breed { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+  .pet-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .pet-tag {
+    font-size: 0.74rem; font-weight: 600; padding: 3px 10px; border-radius: 50px;
+  }
+  .tag-pink { background: var(--pink); color: var(--pink-dark); }
+  .tag-mint { background: var(--mint); color: var(--mint-dark); }
+  .tag-lavender { background: var(--lavender); color: var(--lavender-dark); }
+  .tag-peach { background: var(--peach); color: var(--peach-dark); }
+  .tag-sky { background: var(--sky); color: var(--sky-dark); }
+
+  .gallery-cta {
+    text-align: center; margin-top: 2.5rem;
+    padding: 2rem; background: white;
+    border-radius: 20px; border: 2px dashed var(--pink-mid);
+  }
+  .gallery-cta p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+
+  /* ── BOOKING ── */
+  .booking-section { background: var(--white); }
+  .booking-wrapper {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start;
+  }
+  .booking-info h2 { margin-bottom: 1rem; }
+  .booking-info p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
+  .info-points { display: flex; flex-direction: column; gap: 1rem; }
+  .info-point { display: flex; gap: 12px; align-items: flex-start; }
+  .info-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; margin-top: 2px;
+  }
+  .info-dot.pink { background: var(--pink); }
+  .info-dot.mint { background: var(--mint); }
+  .info-dot.lavender { background: var(--lavender); }
+  .info-point-text h4 { font-size: 0.95rem; font-weight: 600; color: var(--brown); }
+  .info-point-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+  .booking-form {
+    background: var(--cream); border-radius: 24px;
+    padding: 2.5rem; border: 2px solid var(--pink);
+  }
+  .form-title {
+    font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700;
+    color: var(--brown); margin-bottom: 0.25rem;
+  }
+  .form-subtitle { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
+  .form-group label {
+    font-size: 0.82rem; font-weight: 600; color: var(--brown);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 11px 14px; border-radius: 12px;
+    border: 2px solid var(--pink-mid);
+    background: white; font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif; color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--pink-dark);
+    box-shadow: 0 0 0 3px rgba(196,109,150,0.15);
+  }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-group select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A6055' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .form-submit {
+    width: 100%; padding: 14px; border-radius: 50px;
+    background: var(--pink-dark); color: white; border: none;
+    font-size: 1rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.2s; margin-top: 0.5rem;
+    box-shadow: 0 4px 18px rgba(196,109,150,0.35);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .form-submit:hover { background: var(--lavender-dark); transform: translateY(-1px); }
+  .form-note { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section { background: var(--cream); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .testimonial-card {
+    background: white; border-radius: 20px; padding: 1.75rem;
+    box-shadow: var(--shadow); border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .testimonial-card:hover { border-color: var(--pink-mid); transform: translateY(-3px); }
+  .stars { color: var(--peach-dark); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testimonial-text { font-size: 0.92rem; color: var(--text); line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-weight: 700; font-family: 'Fraunces', serif;
+    flex-shrink: 0;
+  }
+  .author-name { font-size: 0.88rem; font-weight: 600; color: var(--brown); }
+  .author-sub { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown); color: white;
+    padding: 3rem 2rem 2rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem;
+  }
+  .footer-brand { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .footer-desc { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.65); margin-bottom: 1.25rem; }
+  .footer-contact a { color: var(--pink); text-decoration: none; font-size: 0.88rem; }
+  .footer-col h4 { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1rem; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--pink); }
+  .footer-bottom {
+    max-width: 1100px; margin: 2rem auto 0;
+    padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; color: rgba(255,255,255,0.4);
+  }
+  .heart { color: var(--pink-mid); }
+
+  /* Success message */
+  .success-msg {
+    display: none; background: var(--mint); border: 2px solid var(--mint-mid);
+    border-radius: 16px; padding: 1.5rem; text-align: center; margin-top: 1rem;
+  }
+  .success-msg h3 { font-family: 'Fraunces', serif; color: var(--mint-dark); margin-bottom: 0.25rem; }
+  .success-msg p { font-size: 0.88rem; color: var(--text-muted); }
+
+  @media (max-width: 768px) {
+    .booking-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="index.html" class="nav-logo">
-      <span class="paw">🐾</span>
-      Rutledge Pet Sitting
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="pets.html">Our Pets</a></li>
-      <li><a href="#booking">Book a Stay</a></li>
-      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">
+    <span class="paw-icon">🐾</span> Rutledge Pet Sitting
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Our Pets</a></li>
+    <li><a href="#booking">Book a Stay</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#booking" class="nav-cta">Request Now</a></li>
+  </ul>
+</nav>
 
-  <div class="page-content">
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="floating-paws">
+    <span class="fp">🐾</span>
+    <span class="fp">🐾</span>
+    <span class="fp">🐾</span>
+    <span class="fp">🐾</span>
+    <span class="fp">🐾</span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🌸 Trusted by families since 2018</div>
+    <h1>Your pets deserve <em>the best</em> when you're away</h1>
+    <p>Loving, attentive pet care in a warm home environment. We treat every pet like our own — because they deserve nothing less.</p>
+    <div class="hero-buttons">
+      <a href="#booking" class="btn-primary">🐶 Request a Stay</a>
+      <a href="#gallery" class="btn-secondary">🖼️ Meet the Pets</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">Happy Clients</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">200+</span>
+        <span class="stat-label">Stays Completed</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">5★</span>
+        <span class="stat-label">Average Rating</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="hero-bg-shapes">
-        <div class="hero-shape"></div>
-        <div class="hero-shape"></div>
-        <div class="hero-shape"></div>
-        <div class="hero-shape"></div>
-      </div>
-      <div class="hero-content">
-        <div class="hero-badge">🏡 Serving our community with love</div>
-        <h1>
-          The Home Away
-          <span>From Home</span>
-        </h1>
-        <p class="hero-tagline">
-          Professional, loving pet sitting for your furry family members.
-          Tail wags and purrs guaranteed every single visit.
-        </p>
-        <div class="hero-buttons">
-          <a href="#booking" class="btn btn-primary">🐾 Request a Booking</a>
-          <a href="pets.html" class="btn btn-secondary">Meet Our Pets 🐶</a>
-        </div>
-        <div class="hero-paws">
-          <span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span>
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">🌟 What We Offer</div>
+      <h2 class="section-title">Tailored care for every pet</h2>
+      <p class="section-sub">From overnight stays to daily drop-ins, we offer flexible care that fits your schedule. Pricing coming soon!</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card pink">
+        <span class="service-emoji">🏠</span>
+        <div class="service-title">Overnight Boarding</div>
+        <div class="service-desc">Your pet stays at our home in a cozy, loving environment. They get the full family treatment — cuddles included.</div>
+        <div class="service-price">Pricing coming soon
+          <div class="price-note">Per night · Inquire for multi-pet</div>
         </div>
       </div>
-    </section>
+      <div class="service-card mint">
+        <span class="service-emoji">🚶</span>
+        <div class="service-title">Dog Walking</div>
+        <div class="service-desc">Daily walks tailored to your pup's energy level and needs. Great exercise and social enrichment!</div>
+        <div class="service-price mint-price">Pricing coming soon
+          <div class="price-note">Per 30-min walk</div>
+        </div>
+      </div>
+      <div class="service-card lavender">
+        <span class="service-emoji">🏡</span>
+        <div class="service-title">In-Home Pet Sitting</div>
+        <div class="service-desc">We come to you! Your pet stays in their own space while getting the care and attention they need.</div>
+        <div class="service-price lavender-price">Pricing coming soon
+          <div class="price-note">Per visit</div>
+        </div>
+      </div>
+      <div class="service-card peach">
+        <span class="service-emoji">🌅</span>
+        <div class="service-title">Drop-In Visits</div>
+        <div class="service-desc">Quick check-ins for feeding, potty breaks, fresh water, and a little love. Perfect for busy days.</div>
+        <div class="service-price peach-price">Pricing coming soon
+          <div class="price-note">Per drop-in</div>
+        </div>
+      </div>
+      <div class="service-card sky">
+        <span class="service-emoji">🐱</span>
+        <div class="service-title">Cat Care</div>
+        <div class="service-desc">We know cats love their own space. Daily visits to feed, play, clean litter, and give extra love.</div>
+        <div class="service-price sky-price">Pricing coming soon
+          <div class="price-note">Per visit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ABOUT -->
-    <section class="about" id="about">
-      <div class="about-inner">
-        <div class="about-visual fade-in">
-          <div class="about-emoji-box">🐕</div>
-          <div class="about-badge">
-            <div class="number">5+</div>
-            <div class="label">Years of Love</div>
-          </div>
-        </div>
-        <div class="about-text fade-in">
-          <div class="section-label">About Us</div>
-          <h2>We Treat Every Pet Like Our Own</h2>
-          <p>
-            Hi! I'm Mrs. Rutledge, and I've been caring for pets in our community
-            for years. What started as helping a few neighbors has grown into a
-            trusted pet sitting service built on one simple belief — every animal
-            deserves safe, loving, attentive care.
-          </p>
-          <p>
-            We keep things personal and small so your pet always gets one-on-one
-            attention. No big kennels, no cages — just a warm, happy home
-            environment where pets can truly relax and thrive.
-          </p>
-          <ul class="about-features">
-            <li>
-              <span class="icon icon-mint">🏠</span>
-              Home-based care — no cold kennels
-            </li>
-            <li>
-              <span class="icon icon-pink">💉</span>
-              Updates & photos sent to you daily
-            </li>
-            <li>
-              <span class="icon icon-peach">🚶</span>
-              Walks, play time & plenty of cuddles
-            </li>
-            <li>
-              <span class="icon icon-lavender">📞</span>
-              Always reachable by text or call
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+<!-- PET GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="gallery-header">
+      <div class="section-label">📸 Our Furry Friends</div>
+      <h2 class="section-title">Meet the pets we adore</h2>
+      <p class="section-sub">These are just a few of the wonderful animals we've had the joy of caring for. Each one is special to us!</p>
+    </div>
+    <div class="gallery-tabs">
+      <button class="tab-btn active" data-tab="all" onclick="filterPets('all')">🐾 All Pets</button>
+      <button class="tab-btn" data-tab="dogs" onclick="filterPets('dogs')">🐶 Dogs</button>
+      <button class="tab-btn" data-tab="cats" onclick="filterPets('cats')">🐱 Cats</button>
+      <button class="tab-btn" data-tab="other" onclick="filterPets('other')">🐰 Others</button>
+    </div>
+    <div class="pets-grid" id="petsGrid">
+      <!-- Populated by JS -->
+    </div>
+    <div class="gallery-cta">
+      <p>Is your pet featured here? Or want them to be? We love celebrating the animals we care for! 🌸</p>
+      <a href="#booking" class="btn-primary">Book a stay and join the family</a>
+    </div>
+  </div>
+</section>
 
-    <!-- SERVICES -->
-    <section class="services" id="services">
-      <div class="section-header fade-in">
-        <div class="section-label">What We Offer</div>
-        <h2>Our Services</h2>
-        <p>Tailored care for every furry, feathery, or scaly friend in your family.</p>
-      </div>
-      <div class="services-grid">
-        <div class="service-card lavender fade-in">
-          <span class="service-icon">🏡</span>
-          <h3>Overnight Stays</h3>
-          <p>Your pet sleeps in our home, comfortable and loved all night long.</p>
-          <span class="service-price">Pricing TBD</span>
-        </div>
-        <div class="service-card mint fade-in">
-          <span class="service-icon">🌅</span>
-          <h3>Drop-In Visits</h3>
-          <p>We stop by your home to feed, play, and check on your pet.</p>
-          <span class="service-price">Pricing TBD</span>
-        </div>
-        <div class="service-card peach fade-in">
-          <span class="service-icon">🦮</span>
-          <h3>Dog Walking</h3>
-          <p>Daily walks to keep your pup healthy, happy, and well-exercised.</p>
-          <span class="service-price">Pricing TBD</span>
-        </div>
-        <div class="service-card pink fade-in">
-          <span class="service-icon">🐱</span>
-          <h3>Cat Sitting</h3>
-          <p>Dedicated care for your feline friends — feeding, litter, and love.</p>
-          <span class="service-price">Pricing TBD</span>
-        </div>
-        <div class="service-card yellow fade-in">
-          <span class="service-icon">🐾</span>
-          <h3>Doggy Day Care</h3>
-          <p>Full-day care while you're at work — play, rest, and everything in between.</p>
-          <span class="service-price">Pricing TBD</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- PETS PREVIEW -->
-    <section class="pets-preview" id="pets">
-      <div class="section-header fade-in">
-        <div class="section-label">Meet the Crew</div>
-        <h2>Our Furry Guests</h2>
-        <p>Every pet that visits becomes a part of our family. Here are a few of our favorites!</p>
-      </div>
-      <div class="pets-grid">
-        <div class="pet-card fade-in">
-          <div class="pet-card-img bg-lavender">🐶</div>
-          <div class="pet-card-body">
-            <h3>Biscuit</h3>
-            <div class="pet-breed">Golden Retriever · 3 yrs</div>
-            <div class="pet-tags">
-              <span class="pet-tag tag-lavender">Playful</span>
-              <span class="pet-tag tag-mint">Good Boy</span>
+<!-- BOOKING -->
+<section class="booking-section" id="booking">
+  <div class="container">
+    <div class="booking-wrapper">
+      <div class="booking-info">
+        <div class="section-label">📋 Book a Stay</div>
+        <h2 class="section-title">Ready to book?</h2>
+        <p>Fill out the form and we'll be in touch within 24 hours to confirm availability and answer any questions. We can't wait to meet your furry family!</p>
+        <div class="info-points">
+          <div class="info-point">
+            <div class="info-dot pink">📞</div>
+            <div class="info-point-text">
+              <h4>Quick Response</h4>
+              <p>We respond to all inquiries within 24 hours, usually much sooner!</p>
             </div>
           </div>
-        </div>
-        <div class="pet-card fade-in">
-          <div class="pet-card-img bg-mint">🐕</div>
-          <div class="pet-card-body">
-            <h3>Luna</h3>
-            <div class="pet-breed">French Bulldog · 2 yrs</div>
-            <div class="pet-tags">
-              <span class="pet-tag tag-pink">Cuddly</span>
-              <span class="pet-tag tag-peach">Snorer</span>
+          <div class="info-point">
+            <div class="info-dot mint">🤝</div>
+            <div class="info-point-text">
+              <h4>Meet & Greet</h4>
+              <p>First-time clients get a free meet & greet so everyone feels comfortable.</p>
             </div>
           </div>
-        </div>
-        <div class="pet-card fade-in">
-          <div class="pet-card-img bg-peach">🐩</div>
-          <div class="pet-card-body">
-            <h3>Coco</h3>
-            <div class="pet-breed">Mini Poodle · 5 yrs</div>
-            <div class="pet-tags">
-              <span class="pet-tag tag-yellow">Diva</span>
-              <span class="pet-tag tag-lavender">Loves Walks</span>
-            </div>
-          </div>
-        </div>
-        <div class="pet-card fade-in">
-          <div class="pet-card-img bg-pink">🐱</div>
-          <div class="pet-card-body">
-            <h3>Mochi</h3>
-            <div class="pet-breed">Tabby Cat · 4 yrs</div>
-            <div class="pet-tags">
-              <span class="pet-tag tag-mint">Chill</span>
-              <span class="pet-tag tag-pink">Night Owl</span>
+          <div class="info-point">
+            <div class="info-dot lavender">📱</div>
+            <div class="info-point-text">
+              <h4>Photo Updates</h4>
+              <p>We send regular photos and updates so you never have to wonder how they're doing.</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="pets-cta fade-in">
-        <a href="pets.html" class="btn btn-secondary">See All Our Pets 🐾</a>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="testimonials" id="testimonials">
-      <div class="section-header fade-in">
-        <div class="section-label">Happy Pet Parents</div>
-        <h2>What Clients Say</h2>
-        <p>Don't just take our word for it — hear from the humans we've helped!</p>
-      </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card fade-in">
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-          <p>"Mrs. Rutledge is absolutely amazing with our dog Max. She sends us photos every day and he always comes home SO happy. We wouldn't trust anyone else!"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar avatar-lavender">👩</div>
-            <div>
-              <div class="author-name">Sarah M.</div>
-              <div class="author-pet">Mom to Max 🐾</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card fade-in">
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-          <p>"Our cats are notoriously shy but they absolutely love her! We finally feel at ease going on vacations knowing they're in such caring hands."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar avatar-mint">👨</div>
-            <div>
-              <div class="author-name">James & Lily K.</div>
-              <div class="author-pet">Cat parents 🐱</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card fade-in">
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-          <p>"Affordable, reliable, and incredibly sweet. Biscuit was practically running to the door when we dropped him off! Best decision we ever made."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar avatar-peach">👩</div>
-            <div>
-              <div class="author-name">Tanya R.</div>
-              <div class="author-pet">Biscuit's mom 🐕</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BOOKING -->
-    <section class="booking-section" id="booking">
-      <div class="booking-inner fade-in">
-        <div class="booking-intro">
-          <div class="section-label">Reserve a Spot</div>
-          <h2>Book a Stay 🐾</h2>
-          <p>Fill out the form below and we'll reach out within 24 hours to confirm your booking!</p>
-        </div>
-
-        <div class="success-message" id="successMessage">
-          <div style="font-size: 3rem; margin-bottom: 0.75rem;">🎉</div>
-          <h3>Request Sent!</h3>
-          <p>Thank you! We'll be in touch within 24 hours to confirm your booking. Your pet is going to have the best time! 🐾</p>
-        </div>
-
-        <form class="booking-form" id="bookingForm" novalidate>
-          <div class="form-section-title">👤 Your Information</div>
+      <div class="booking-form">
+        <div class="form-title">🐾 Request a Booking</div>
+        <div class="form-subtitle">Tell us about your pet and we'll reach out to confirm!</div>
+        <form id="bookingForm" onsubmit="submitForm(event)">
           <div class="form-row">
             <div class="form-group">
-              <label for="ownerName">Your Name *</label>
-              <input type="text" id="ownerName" name="ownerName" placeholder="Jane Smith" required />
+              <label>👤 Your Name</label>
+              <input type="text" placeholder="Jane Smith" required>
             </div>
             <div class="form-group">
-              <label for="phone">Phone Number *</label>
-              <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required />
+              <label>📱 Phone Number</label>
+              <input type="tel" placeholder="(555) 123-4567" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="jane@email.com" />
+            <label>📧 Email Address</label>
+            <input type="email" placeholder="jane@example.com">
           </div>
-
-          <hr class="form-divider" />
-          <div class="form-section-title">🐾 About Your Pet</div>
           <div class="form-row">
             <div class="form-group">
-              <label for="petName">Pet's Name *</label>
-              <input type="text" id="petName" name="petName" placeholder="Fluffy" required />
+              <label>🐾 Pet's Name</label>
+              <input type="text" placeholder="Fluffy" required>
             </div>
             <div class="form-group">
-              <label for="petType">Type of Pet *</label>
-              <select id="petType" name="petType" required>
-                <option value="" disabled selected>Select one...</option>
-                <option>🐶 Dog</option>
-                <option>🐱 Cat</option>
-                <option>🐰 Rabbit</option>
-                <option>🐦 Bird</option>
-                <option>🐹 Small Animal</option>
+              <label>🐶 Pet Type</label>
+              <select required>
+                <option value="" disabled selected>Select type</option>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Rabbit</option>
+                <option>Bird</option>
                 <option>Other</option>
               </select>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="petBreed">Breed / Description</label>
-              <input type="text" id="petBreed" name="petBreed" placeholder="Golden Retriever, 2 yrs" />
-            </div>
-            <div class="form-group">
-              <label for="service">Service Needed *</label>
-              <select id="service" name="service" required>
-                <option value="" disabled selected>Select a service...</option>
-                <option>🏡 Overnight Stay</option>
-                <option>🌅 Drop-In Visit</option>
-                <option>🦮 Dog Walking</option>
-                <option>🐾 Doggy Day Care</option>
-                <option>🐱 Cat Sitting</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label>🛎️ Service Needed</label>
+            <select required>
+              <option value="" disabled selected>Select a service</option>
+              <option>Overnight Boarding</option>
+              <option>Dog Walking</option>
+              <option>In-Home Pet Sitting</option>
+              <option>Drop-In Visit</option>
+              <option>Cat Care</option>
+              <option>Not sure — let's chat!</option>
+            </select>
           </div>
-
-          <hr class="form-divider" />
-          <div class="form-section-title">📅 Dates & Details</div>
           <div class="form-row">
             <div class="form-group">
-              <label for="startDate">Start Date *</label>
-              <input type="date" id="startDate" name="startDate" required />
+              <label>📅 Start Date</label>
+              <input type="date" required>
             </div>
             <div class="form-group">
-              <label for="endDate">End Date</label>
-              <input type="date" id="endDate" name="endDate" />
+              <label>📅 End Date</label>
+              <input type="date">
             </div>
           </div>
           <div class="form-group">
-            <label for="notes">Special Notes or Instructions</label>
-            <textarea id="notes" name="notes" placeholder="Feeding schedule, medications, quirks, favorite toys... anything we should know! 💕"></textarea>
+            <label>💬 Anything else we should know?</label>
+            <textarea placeholder="Special needs, feeding schedule, quirks we'll love..."></textarea>
           </div>
-
-          <div class="form-submit">
-            <button type="submit" class="btn btn-primary">
-              Send My Request 🐾
-            </button>
-            <p class="form-note">We'll text or call you back within 24 hours!</p>
-          </div>
+          <button type="submit" class="form-submit">🐾 Send My Request</button>
+          <p class="form-note">We'll reach out within 24 hours. No payment required to request!</p>
         </form>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer id="contact">
-      <div class="footer-inner">
-        <div class="footer-top">
-          <div class="footer-brand">
-            <div class="logo-text">🐾 Rutledge Pet Sitting</div>
-            <p>
-              Providing loving, professional care for your furry family members.
-              Every pet deserves a safe and happy place to be.
-            </p>
-          </div>
-          <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="pets.html">Our Pets</a></li>
-              <li><a href="#booking">Book a Stay</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Get in Touch</h4>
-            <ul class="footer-contact">
-              <li>📞 <span>(555) 000-0000</span></li>
-              <li>📱 <span>Text us anytime!</span></li>
-              <li>📍 <span>Your Local Area</span></li>
-              <li>🕐 <span>Available 7 days a week</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2024 Rutledge Pet Sitting · Made with 💜 for our furry friends</p>
-          <div class="footer-paws">🐾🐾🐾</div>
+        <div class="success-msg" id="successMsg">
+          <h3>🎉 Request Sent!</h3>
+          <p>Thanks for reaching out! We'll be in touch very soon to confirm your booking. Can't wait to meet your furry one!</p>
         </div>
       </div>
-    </footer>
-
-  </div><!-- end page-content -->
-
-  <!-- Scroll to top -->
-  <div class="floating-paws">
-    <button class="scroll-top" id="scrollTop" aria-label="Back to top">⬆</button>
+    </div>
   </div>
+</section>
 
-  <script src="js/main.js"></script>
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div style="margin-bottom: 3rem;">
+      <div class="section-label">💬 Happy Clients</div>
+      <h2 class="section-title">What pet parents are saying</h2>
+      <p class="section-sub">Don't take our word for it — hear from the families who trust us with their fur babies.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"We were so nervous leaving our dog for the first time, but the photo updates and updates made all the difference. Max came home happy and relaxed!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:var(--pink);color:var(--pink-dark);">S</div>
+          <div>
+            <div class="author-name">Sarah K.</div>
+            <div class="author-sub">Max's mom 🐕</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Our cats are notoriously picky and we were worried, but they were so well cared for. The house was tidy, the cats were happy, and we had zero stress on vacation."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:var(--mint);color:var(--mint-dark);">R</div>
+          <div>
+            <div class="author-name">Rachel & Tom</div>
+            <div class="author-sub">Luna & Oliver's parents 🐱</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The daily walks have been a game changer for our energetic golden! Bella loves her walks and comes back happy and tired. Couldn't recommend more!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:var(--lavender);color:var(--lavender-dark);">J</div>
+          <div>
+            <div class="author-name">James T.</div>
+            <div class="author-sub">Bella's dad 🐕‍🦺</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">🐾 Rutledge Pet Sitting</div>
+      <p class="footer-desc">Providing loving, attentive care for your pets since 2018. We're not just a service — we're your pet's home away from home.</p>
+      <div class="footer-contact">
+        <a href="tel:+15551234567">📞 Call or text to chat!</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul class="footer-links">
+        <li><a href="#services">Overnight Boarding</a></li>
+        <li><a href="#services">Dog Walking</a></li>
+        <li><a href="#services">In-Home Sitting</a></li>
+        <li><a href="#services">Drop-In Visits</a></li>
+        <li><a href="#services">Cat Care</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#gallery">Our Pets</a></li>
+        <li><a href="#booking">Book a Stay</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Rutledge Pet Sitting. All rights reserved.</span>
+    <span>Made with <span class="heart">♥</span> for animals everywhere</span>
+  </div>
+</footer>
+
+<script>
+const pets = [
+  { name: "Biscuit", breed: "Golden Retriever", emoji: "🐕", bg: "#FDEBD0", type: "dogs", tags: ["Boarding", "Walking"], tagColors: ["tag-peach", "tag-mint"] },
+  { name: "Luna", breed: "Domestic Shorthair", emoji: "🐱", bg: "#E8DEFF", type: "cats", tags: ["Drop-in"], tagColors: ["tag-lavender"] },
+  { name: "Mocha", breed: "Labradoodle", emoji: "🐶", bg: "#F9D8E8", type: "dogs", tags: ["Boarding", "Regular"], tagColors: ["tag-pink", "tag-sky"] },
+  { name: "Oliver", breed: "Maine Coon", emoji: "🐈", bg: "#D4F0E4", type: "cats", tags: ["Home Sitting"], tagColors: ["tag-mint"] },
+  { name: "Peanut", breed: "Holland Lop Rabbit", emoji: "🐰", bg: "#D6EEFF", type: "other", tags: ["Drop-in"], tagColors: ["tag-sky"] },
+  { name: "Daisy", breed: "Beagle", emoji: "🐕‍🦺", bg: "#FDEBD0", type: "dogs", tags: ["Walking", "Regular"], tagColors: ["tag-peach", "tag-pink"] },
+  { name: "Mochi", breed: "Scottish Fold", emoji: "😸", bg: "#E8DEFF", type: "cats", tags: ["Boarding"], tagColors: ["tag-lavender"] },
+  { name: "Charlie", breed: "Cockatiel", emoji: "🦜", bg: "#D4F0E4", type: "other", tags: ["Drop-in"], tagColors: ["tag-mint"] },
+];
+
+function filterPets(type) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-tab="${type}"]`).classList.add('active');
+  renderPets(type === 'all' ? pets : pets.filter(p => p.type === type));
+}
+
+function renderPets(list) {
+  const grid = document.getElementById('petsGrid');
+  grid.innerHTML = list.map(p => `
+    <div class="pet-card">
+      <div class="pet-photo">
+        <div class="pet-bg" style="background:${p.bg};position:absolute;inset:0;"></div>
+        <span class="pet-emoji" style="font-size:5rem;position:relative;z-index:1;">${p.emoji}</span>
+      </div>
+      <div class="pet-info">
+        <div class="pet-name">${p.name}</div>
+        <div class="pet-breed">${p.breed}</div>
+        <div class="pet-tags">${p.tags.map((t,i) => `<span class="pet-tag ${p.tagColors[i]}">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+renderPets(pets);
+
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('bookingForm').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
 </body>
 </html>
