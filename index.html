@@ -318,6 +318,58 @@
   .info-point-text h4 { font-size: 0.95rem; font-weight: 600; color: var(--brown); }
   .info-point-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
 
+  .booking-graphic {
+    margin-top: 2.5rem;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--lavender) 60%, var(--mint) 100%);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .booking-graphic::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.4) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .booking-graphic-pets {
+    display: flex; justify-content: space-around; align-items: flex-end;
+    font-size: 3rem; margin-bottom: 1.5rem; position: relative; z-index: 1;
+  }
+  .booking-graphic-pets span {
+    display: inline-block;
+    animation: petBounce 2.4s ease-in-out infinite;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+  }
+  .booking-graphic-pets span:nth-child(1) { animation-delay: 0s; font-size: 2.4rem; }
+  .booking-graphic-pets span:nth-child(2) { animation-delay: 0.4s; font-size: 3.2rem; }
+  .booking-graphic-pets span:nth-child(3) { animation-delay: 0.8s; font-size: 2.6rem; }
+  .booking-graphic-pets span:nth-child(4) { animation-delay: 1.2s; font-size: 2rem; }
+  .booking-graphic-pets span:nth-child(5) { animation-delay: 0.6s; font-size: 2.8rem; }
+  @keyframes petBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .booking-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.75rem; position: relative; z-index: 1;
+  }
+  .booking-stat-pill {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(255,255,255,0.9);
+    border-radius: 16px; padding: 0.75rem 1rem;
+    text-align: center;
+  }
+  .booking-stat-pill .pill-num {
+    font-family: 'Fraunces', serif; font-size: 1.5rem;
+    font-weight: 700; color: var(--brown); line-height: 1;
+  }
+  .booking-stat-pill .pill-label {
+    font-size: 0.75rem; color: var(--text-muted);
+    font-weight: 500; margin-top: 2px;
+  }
+
   .booking-form {
     background: var(--cream); border-radius: 24px;
     padding: 2.5rem; border: 2px solid var(--pink);
@@ -585,6 +637,36 @@
             </div>
           </div>
         </div>
+
+        <!-- Decorative graphic card -->
+        <div class="booking-graphic">
+          <div class="booking-graphic-pets">
+            <span>🐶</span>
+            <span>🐱</span>
+            <span>🐾</span>
+            <span>🐰</span>
+            <span>🐕</span>
+          </div>
+          <div class="booking-stats">
+            <div class="booking-stat-pill">
+              <div class="pill-num">50+</div>
+              <div class="pill-label">Happy Pets</div>
+            </div>
+            <div class="booking-stat-pill">
+              <div class="pill-num">5 ⭐</div>
+              <div class="pill-label">Rated Service</div>
+            </div>
+            <div class="booking-stat-pill">
+              <div class="pill-num">24h</div>
+              <div class="pill-label">Response Time</div>
+            </div>
+            <div class="booking-stat-pill">
+              <div class="pill-num">7</div>
+              <div class="pill-label">Days a Week</div>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="booking-form">
         <div class="form-title">🐾 Request a Booking</div>
